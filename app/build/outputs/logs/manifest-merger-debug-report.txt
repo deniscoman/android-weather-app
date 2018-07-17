@@ -11,6 +11,7 @@ MERGED from [com.android.support:appcompat-v7:27.1.1] /home/denis/.gradle/caches
 MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/denis/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/bca30e9dca038e25ba3ae3e0b2bfffa6/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.0-beta1] /home/denis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.0-beta1.aar/800c3e7428c47074110ff065ab322246/AndroidManifest.xml:2:1-11:12
 MERGED from [com.firebase:firebase-jobdispatcher:0.7.0] /home/denis/.gradle/caches/transforms-1/files-1.1/firebase-jobdispatcher-0.7.0.aar/fcadbf383f0d7ff6c4e8cbc922cc76f7/AndroidManifest.xml:17:1-42:12
+MERGED from [android.arch.persistence.room:runtime:1.0.0-alpha9] /home/denis/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0-alpha9.aar/b62d210453ce44a46db7bc81d4181e9e/AndroidManifest.xml:17:1-26:12
 MERGED from [com.android.support:support-v4:27.1.1] /home/denis/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/3341a8b238811196b9e5dd37fc8ac223/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:27.1.1] /home/denis/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/05b11e6ea891904cecc7bc13e19b3101/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/denis/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/f80c5f710272ff849bbdfa390394b4b2/AndroidManifest.xml:17:1-22:12
@@ -20,6 +21,8 @@ MERGED from [com.android.support:support-core-utils:27.1.1] /home/denis/.gradle/
 MERGED from [com.android.support:support-media-compat:27.1.1] /home/denis/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/c02e192ad54d692b72092b105a83263c/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-compat:27.1.1] /home/denis/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/cb06c788583b259351ee4fc92bba9ad3/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/denis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/28d4f44c1ce7514a5d188bc18e861e76/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.persistence.room:support-db-impl:1.0.0-alpha9] /home/denis/.gradle/caches/transforms-1/files-1.1/support-db-impl-1.0.0-alpha9.aar/ba7a104a6575656e98594cd41ba32638/AndroidManifest.xml:17:1-26:12
+MERGED from [android.arch.persistence.room:support-db:1.0.0-alpha9] /home/denis/.gradle/caches/transforms-1/files-1.1/support-db-1.0.0-alpha9.aar/0d6226cce4bf75dc4a9c36b74a2edf24/AndroidManifest.xml:17:1-26:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/denis/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/6a206e02e3c00a27f6f4dc339582c976/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.0] /home/denis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/d8c66f9172379d952d91c9b69d0f37ae/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/denis/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/a492d67dbd1e19fd0040bd7ba44e7dfc/AndroidManifest.xml:17:1-22:12
@@ -132,6 +135,8 @@ MERGED from [com.android.support.constraint:constraint-layout:1.1.0-beta1] /home
 MERGED from [com.android.support.constraint:constraint-layout:1.1.0-beta1] /home/denis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.0-beta1.aar/800c3e7428c47074110ff065ab322246/AndroidManifest.xml:5:5-7:41
 MERGED from [com.firebase:firebase-jobdispatcher:0.7.0] /home/denis/.gradle/caches/transforms-1/files-1.1/firebase-jobdispatcher-0.7.0.aar/fcadbf383f0d7ff6c4e8cbc922cc76f7/AndroidManifest.xml:22:5-24:41
 MERGED from [com.firebase:firebase-jobdispatcher:0.7.0] /home/denis/.gradle/caches/transforms-1/files-1.1/firebase-jobdispatcher-0.7.0.aar/fcadbf383f0d7ff6c4e8cbc922cc76f7/AndroidManifest.xml:22:5-24:41
+MERGED from [android.arch.persistence.room:runtime:1.0.0-alpha9] /home/denis/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0-alpha9.aar/b62d210453ce44a46db7bc81d4181e9e/AndroidManifest.xml:22:5-24:41
+MERGED from [android.arch.persistence.room:runtime:1.0.0-alpha9] /home/denis/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0-alpha9.aar/b62d210453ce44a46db7bc81d4181e9e/AndroidManifest.xml:22:5-24:41
 MERGED from [com.android.support:support-v4:27.1.1] /home/denis/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/3341a8b238811196b9e5dd37fc8ac223/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-v4:27.1.1] /home/denis/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/3341a8b238811196b9e5dd37fc8ac223/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:27.1.1] /home/denis/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/05b11e6ea891904cecc7bc13e19b3101/AndroidManifest.xml:20:5-44
@@ -150,6 +155,10 @@ MERGED from [com.android.support:support-compat:27.1.1] /home/denis/.gradle/cach
 MERGED from [com.android.support:support-compat:27.1.1] /home/denis/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/cb06c788583b259351ee4fc92bba9ad3/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/denis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/28d4f44c1ce7514a5d188bc18e861e76/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/denis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/28d4f44c1ce7514a5d188bc18e861e76/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence.room:support-db-impl:1.0.0-alpha9] /home/denis/.gradle/caches/transforms-1/files-1.1/support-db-impl-1.0.0-alpha9.aar/ba7a104a6575656e98594cd41ba32638/AndroidManifest.xml:22:5-24:41
+MERGED from [android.arch.persistence.room:support-db-impl:1.0.0-alpha9] /home/denis/.gradle/caches/transforms-1/files-1.1/support-db-impl-1.0.0-alpha9.aar/ba7a104a6575656e98594cd41ba32638/AndroidManifest.xml:22:5-24:41
+MERGED from [android.arch.persistence.room:support-db:1.0.0-alpha9] /home/denis/.gradle/caches/transforms-1/files-1.1/support-db-1.0.0-alpha9.aar/0d6226cce4bf75dc4a9c36b74a2edf24/AndroidManifest.xml:22:5-24:41
+MERGED from [android.arch.persistence.room:support-db:1.0.0-alpha9] /home/denis/.gradle/caches/transforms-1/files-1.1/support-db-1.0.0-alpha9.aar/0d6226cce4bf75dc4a9c36b74a2edf24/AndroidManifest.xml:22:5-24:41
 MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/denis/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/6a206e02e3c00a27f6f4dc339582c976/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/denis/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/6a206e02e3c00a27f6f4dc339582c976/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.0] /home/denis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/d8c66f9172379d952d91c9b69d0f37ae/AndroidManifest.xml:20:5-44

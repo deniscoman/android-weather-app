@@ -33,6 +33,8 @@ dependencies {
     implementation "com.android.support:preference-v7:$support_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
     implementation "com.firebase:firebase-jobdispatcher:$firebase_jobdispatcher_version"
+    implementation "android.arch.persistence.room:runtime:1.0.0-alpha9"
+    annotationProcessor "android.arch.persisntece.room:compiler:1.0.0-alpha9"
 
     // Instrumentation dependencies use androidTestCompile"
     // (as opposed to testCompile for local unit tests run in the JVM"
