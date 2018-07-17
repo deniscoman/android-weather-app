@@ -15,6 +15,7 @@
  */
 package com.example.android.sunshine.ui.detail;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,8 @@ import java.util.Date;
  */
 public class DetailActivity extends AppCompatActivity {
 
+    private DetailActivityViewModel mViewModel;
+
     public static final String WEATHER_ID_EXTRA = "WEATHER_ID_EXTRA";
 
     /*
@@ -46,10 +49,15 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(DetailActivityViewModel.class);
 
         mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
         long timestamp = getIntent().getLongExtra(WEATHER_ID_EXTRA, -1);
         Date date = new Date(timestamp);
+
+        mViewModel.getWeather().observe(this, weatherEntry -> {
+            if (weatherEntry != null) bindWeatherToUI(weatherEntry);
+        });
 
     }
 
