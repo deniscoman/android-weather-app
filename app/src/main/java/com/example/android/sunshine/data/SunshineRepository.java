@@ -24,7 +24,9 @@ import com.example.android.sunshine.data.database.WeatherDao;
 import com.example.android.sunshine.data.database.WeatherEntry;
 import com.example.android.sunshine.data.network.WeatherNetworkDataSource;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Handles data operations in Sunshine. Acts as a mediator between {@link WeatherNetworkDataSource}
@@ -60,6 +62,12 @@ public class SunshineRepository {
     public LiveData<WeatherEntry> getWeatherByDate(Date date) {
         initializeData();
         return mWeatherDao.getWeatherByDate(date);
+    }
+
+    public LiveData<List<WeatherEntry>> getFutureWeatherListByDate() {
+        initializeData();
+        Date currentTime = Calendar.getInstance().getTime();
+        return mWeatherDao.getFutureWeatherListByDate(currentTime);
     }
 
     public synchronized static SunshineRepository getInstance(

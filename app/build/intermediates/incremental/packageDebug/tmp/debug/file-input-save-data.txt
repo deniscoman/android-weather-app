@@ -1,7 +1,0 @@
-#Internal package file, do not edit.
-#Tue Jul 17 09:47:01 EEST 2018
-0.baseType=DIRECTORY
-0.base=/home/denis/Projects/Sunshine/architectureComponentsSunshineStartingCode-20180716T064128Z-001/architectureComponentsSunshineStartingCode/architectureComponentsSunshineStartingCode/app/build/intermediates/transforms/dexMerger/debug/18
-0.path=classes.dex
-0.set=DEX
-count=1

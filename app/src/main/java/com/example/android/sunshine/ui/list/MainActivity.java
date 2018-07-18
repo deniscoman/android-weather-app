@@ -25,6 +25,7 @@ import android.widget.ProgressBar;
 
 import com.example.android.sunshine.R;
 import com.example.android.sunshine.ui.detail.DetailActivity;
+import com.example.android.sunshine.utilities.InjectorUtils;
 
 import java.util.Date;
 
@@ -39,11 +40,15 @@ public class MainActivity extends AppCompatActivity implements
     private RecyclerView mRecyclerView;
     private int mPosition = RecyclerView.NO_POSITION;
     private ProgressBar mLoadingIndicator;
+    private MainActivityViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
+
+        MainViewModelFactory factory = InjectorUtils.provideMainActivityViewModelFactory(this.getApplicationContext());
+        mViewModel = factory.create(MainActivityViewModel.class);
 
         /*
          * Using findViewById, we get a reference to our RecyclerView from xml. This allows us to
@@ -102,6 +107,13 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setAdapter(mForecastAdapter);
         showLoading();
 
+        // observi changes
+        // swap
+        // hideLoading
+        mViewModel.getWeatherList().observe(this, weatherEntries -> {
+            mForecastAdapter.swapForecast(weatherEntries);
+            hideLoading();
+        });
     }
 
     /**
@@ -143,5 +155,10 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setVisibility(View.INVISIBLE);
         // Finally, show the loading indicator
         mLoadingIndicator.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoading() {
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mLoadingIndicator.setVisibility(View.GONE);
     }
 }

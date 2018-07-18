@@ -1,4 +1,0 @@
-#Mon Jul 16 16:57:23 EEST 2018
-base.0=/home/denis/Projects/Sunshine/architectureComponentsSunshineStartingCode-20180716T064128Z-001/architectureComponentsSunshineStartingCode/architectureComponentsSunshineStartingCode/app/build/intermediates/transforms/dexMerger/debug/6
-path.0=classes.dex
-renamed.0=classes.dex
