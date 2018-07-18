@@ -20,6 +20,7 @@ import android.arch.lifecycle.LiveData;
 import android.util.Log;
 
 import com.example.android.sunshine.AppExecutors;
+import com.example.android.sunshine.data.database.ListWeatherEntry;
 import com.example.android.sunshine.data.database.WeatherDao;
 import com.example.android.sunshine.data.database.WeatherEntry;
 import com.example.android.sunshine.data.network.WeatherNetworkDataSource;
@@ -64,7 +65,7 @@ public class SunshineRepository {
         return mWeatherDao.getWeatherByDate(date);
     }
 
-    public LiveData<List<WeatherEntry>> getFutureWeatherListByDate() {
+    public LiveData<List<ListWeatherEntry>> getFutureWeatherListByDate() {
         initializeData();
         Date currentTime = Calendar.getInstance().getTime();
         return mWeatherDao.getFutureWeatherListByDate(currentTime);

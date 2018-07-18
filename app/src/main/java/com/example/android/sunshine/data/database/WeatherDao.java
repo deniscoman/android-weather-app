@@ -12,11 +12,11 @@ import java.util.List;
 @Dao
 public interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void bulkInsert(WeatherEntry... weather);
+    void bulkInsert(WeatherEntry[] weather);
 
     @Query("SELECT *FROM weather WHERE date = :date")
     LiveData<WeatherEntry> getWeatherByDate(Date date);
 
     @Query("SELECT * FROM weather WHERE DATE >= :date")
-    LiveData<List<WeatherEntry>> getFutureWeatherListByDate(Date date);
+    LiveData<List<ListWeatherEntry>> getFutureWeatherListByDate(Date date);
 }
