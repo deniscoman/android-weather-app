@@ -96,6 +96,8 @@ public class SunshineRepository {
         if (mInitialized) return;
         mInitialized = true;
 
+        mWeatherNetworkDataSource.scheduleRecurringFetchWeatherSync();
+
         startFetchWeatherService();
     }
 
