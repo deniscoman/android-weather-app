@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.sunshine.R;
+import com.example.android.sunshine.data.database.ListWeatherEntry;
 import com.example.android.sunshine.data.database.WeatherEntry;
 import com.example.android.sunshine.databinding.ActivityDetailBinding;
 import com.example.android.sunshine.utilities.InjectorUtils;
@@ -38,6 +39,7 @@ public class DetailActivity extends AppCompatActivity {
     private DetailActivityViewModel mViewModel;
 
     public static final String WEATHER_ID_EXTRA = "WEATHER_ID_EXTRA";
+    public static final String LIST_POSITION_EXTRA = "LIST_POSITION_EXTRA";
 
     /*
      * This field is used for data binding. Normally, we would have to call findViewById many
@@ -52,9 +54,11 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
 //        Date date = SunshineDateUtils.getNormalizedUtcDateForToday();
         long timestamp = getIntent().getLongExtra(WEATHER_ID_EXTRA, -1);
+
         Date date = new Date(timestamp);
 
         DetailViewModelFactory factory = InjectorUtils.provideDetailViewModelFactory(this.getApplicationContext(), date);
@@ -64,7 +68,15 @@ public class DetailActivity extends AppCompatActivity {
         mViewModel.getWeather().observe(this, weatherEntry -> {
             if (weatherEntry != null) bindWeatherToUI(weatherEntry);
         });
+    }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        int position = getIntent().getIntExtra(LIST_POSITION_EXTRA, -1);
+        intent.putExtra(LIST_POSITION_EXTRA, position);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     private void bindWeatherToUI(WeatherEntry weatherEntry) {

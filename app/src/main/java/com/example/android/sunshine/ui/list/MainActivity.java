@@ -126,7 +126,19 @@ public class MainActivity extends AppCompatActivity implements
         Intent weatherDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
         long timestamp = date.getTime();
         weatherDetailIntent.putExtra(DetailActivity.WEATHER_ID_EXTRA, timestamp);
+        weatherDetailIntent.putExtra(DetailActivity.LIST_POSITION_EXTRA, mPosition);
         startActivity(weatherDetailIntent);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                mPosition = data.getIntExtra(DetailActivity.LIST_POSITION_EXTRA, -1);
+                mRecyclerView.smoothScrollToPosition(mPosition = mPosition == -1 ? 0 : mPosition);
+            }
+        }
     }
 
     /**
