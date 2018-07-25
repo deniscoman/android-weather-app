@@ -25,6 +25,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="weatherPresenter"
+            type="com.example.android.sunshine.ui.detail.DetailActivity.EntityPresenter" />
+    </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -61,7 +66,7 @@
             app:layout_constraintBottom_toTopOf="@+id/weather_icon"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            tools:text="Saturday, September 24"/>
+            tools:text="@{weatherPresenter.date}"/>
 
         <!-- Icon indicating weather condition -->
         <ImageView
@@ -73,7 +78,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/horizontal_middle"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/art_clouds"/>
+            app:imageResource="@{weatherPresenter.imageId}"/>
 
         <!-- Text that describes weather condition -->
         <TextView
@@ -87,7 +92,7 @@
             app:layout_constraintLeft_toLeftOf="@+id/weather_icon"
             app:layout_constraintRight_toRightOf="@+id/weather_icon"
             app:layout_constraintTop_toBottomOf="@+id/weather_icon"
-            tools:text="Rainy"/>
+            tools:text="@{weatherPresenter.description}"/>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
          - High temperature for today                                                            -
@@ -110,7 +115,7 @@
             app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/weather_icon"
-            tools:text="19\u00b0"/>
+            tools:text="@{weatherPresenter.highTemperature}"/>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
          - Low temperature for today                                                             -
@@ -131,7 +136,7 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/weather_description"
             app:layout_constraintLeft_toLeftOf="@+id/high_temperature"
             app:layout_constraintRight_toRightOf="@+id/high_temperature"
-            tools:text="10\u00b0"/>
+            tools:text="@{weatherPresenter.lowTemperature}"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

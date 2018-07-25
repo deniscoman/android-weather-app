@@ -175,6 +175,7 @@ public final class SunshineDateUtils {
          * As a basis for comparison, we use the number of days that have passed from the epoch
          * until today.
          */
+
         long daysFromEpochToToday = elapsedDaysSinceEpoch(System.currentTimeMillis());
 
         if (daysFromEpochToProvidedDate == daysFromEpochToToday || showFullDate) {

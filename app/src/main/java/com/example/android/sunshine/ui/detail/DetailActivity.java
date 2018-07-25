@@ -16,8 +16,10 @@
 package com.example.android.sunshine.ui.detail;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -38,6 +40,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private DetailActivityViewModel mViewModel;
 
+    public EntityPresenter mEntityPresenter;
+
     public static final String WEATHER_ID_EXTRA = "WEATHER_ID_EXTRA";
     public static final String LIST_POSITION_EXTRA = "LIST_POSITION_EXTRA";
 
@@ -54,9 +58,9 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        mEntityPresenter = new EntityPresenter(getApplicationContext());
         mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
-//        Date date = SunshineDateUtils.getNormalizedUtcDateForToday();
+
         long timestamp = getIntent().getLongExtra(WEATHER_ID_EXTRA, -1);
 
         Date date = new Date(timestamp);
@@ -65,8 +69,13 @@ public class DetailActivity extends AppCompatActivity {
 
         mViewModel = ViewModelProviders.of(this, factory).get(DetailActivityViewModel.class);
 
+
         mViewModel.getWeather().observe(this, weatherEntry -> {
-            if (weatherEntry != null) bindWeatherToUI(weatherEntry);
+            if (weatherEntry != null) {
+                mEntityPresenter.buildFromWeatherEntry(weatherEntry);
+                mDetailBinding.primaryInfo.setWeatherPresenter(mEntityPresenter);
+                mDetailBinding.extraDetails.setWeatherPresenter(mEntityPresenter);
+            }
         });
     }
 
@@ -79,133 +88,78 @@ public class DetailActivity extends AppCompatActivity {
         finish();
     }
 
-    private void bindWeatherToUI(WeatherEntry weatherEntry) {
-        /****************
-         * Weather Icon *
-         ****************/
+    public class EntityPresenter {
+        private Context context;
+        private ObservableField<String> highTemperature = new ObservableField<>();
+        private ObservableField<String> lowTemperature = new ObservableField<>();
+        private ObservableField<String> description = new ObservableField<>();
+        private ObservableField<Integer> imageId = new ObservableField<>();
+        private ObservableField<String> date = new ObservableField<>();
+        private ObservableField<String> humidity = new ObservableField<>();
+        private ObservableField<String> wind = new ObservableField<>();
+        private ObservableField<String> pressure = new ObservableField<>();
 
-        int weatherId = weatherEntry.getWeatherIconId();
-        int weatherImageId = SunshineWeatherUtils.getLargeArtResourceIdForWeatherCondition(weatherId);
+        public EntityPresenter(Context context) {
+            this.context = context;
+        }
 
-        /* Set the resource ID on the icon to display the art */
-        mDetailBinding.primaryInfo.weatherIcon.setImageResource(weatherImageId);
+        public void buildFromWeatherEntry(WeatherEntry entry) {
 
-        /****************
-         * Weather Date *
-         ****************/
-        /*
-         * The date that is stored is a GMT representation at midnight of the date when the weather
-         * information was loaded for.
-         *
-         * When displaying this date, one must add the GMT offset (in milliseconds) to acquire
-         * the date representation for the local date in local time.
-         * SunshineDateUtils#getFriendlyDateString takes care of this for us.
-         */
-        long localDateMidnightGmt = weatherEntry.getDate().getTime();
-        String dateText = SunshineDateUtils.getFriendlyDateString(DetailActivity.this, localDateMidnightGmt, true);
-        mDetailBinding.primaryInfo.date.setText(dateText);
+            int weatherId = entry.getWeatherIconId();
 
-        /***********************
-         * Weather Description *
-         ***********************/
-        /* Use the weatherId to obtain the proper description */
-        String description = SunshineWeatherUtils.getStringForWeatherCondition(DetailActivity.this, weatherId);
+            String maxTemperature = SunshineWeatherUtils.formatTemperature(context, entry.getMax());
+            highTemperature.set(maxTemperature);
 
-        /* Create the accessibility (a11y) String from the weather description */
-        String descriptionA11y = getString(R.string.a11y_forecast, description);
+            String weatherDescription = SunshineWeatherUtils.getStringForWeatherCondition(context, weatherId);
+            description.set(weatherDescription);
 
-        /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.primaryInfo.weatherDescription.setText(description);
-        mDetailBinding.primaryInfo.weatherDescription.setContentDescription(descriptionA11y);
+            Integer weatherImageId = SunshineWeatherUtils.getLargeArtResourceIdForWeatherCondition(weatherId);
+            imageId.set(weatherImageId);
 
-        /* Set the content description on the weather image (for accessibility purposes) */
-        mDetailBinding.primaryInfo.weatherIcon.setContentDescription(descriptionA11y);
+            String dateText = SunshineDateUtils.getFriendlyDateString(context, entry.getDate().getTime(), true);
+            date.set(dateText);
 
-        /**************************
-         * High (max) temperature *
-         **************************/
+            String minTemperature = SunshineWeatherUtils.formatTemperature(context, entry.getMin());
+            lowTemperature.set(minTemperature);
 
-        double maxInCelsius = weatherEntry.getMax();
+            humidity.set(String.valueOf(entry.getHumidity()));
 
-        /*
-         * If the user's preference for weather is fahrenheit, formatTemperature will convert
-         * the temperature. This method will also append either °C or °F to the temperature
-         * String.
-         */
-        String highString = SunshineWeatherUtils.formatTemperature(DetailActivity.this, maxInCelsius);
+            double windSpeed = entry.getWind();
+            double windDirection = entry.getDegrees();
+            String weatherWind = SunshineWeatherUtils.getFormattedWind(DetailActivity.this, windSpeed, windDirection);
+            wind.set(weatherWind);
 
-        /* Create the accessibility (a11y) String from the weather description */
-        String highA11y = getString(R.string.a11y_high_temp, highString);
+            pressure.set(getString(R.string.format_pressure, entry.getPressure()));
+        }
 
-        /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.primaryInfo.highTemperature.setText(highString);
-        mDetailBinding.primaryInfo.highTemperature.setContentDescription(highA11y);
+        public ObservableField<String> getHighTemperature() { return highTemperature; }
 
-        /*************************
-         * Low (min) temperature *
-         *************************/
+        public ObservableField<String> getDate() {
+            return date;
+        }
 
-        double minInCelsius = weatherEntry.getMin();
-        /*
-         * If the user's preference for weather is fahrenheit, formatTemperature will convert
-         * the temperature. This method will also append either °C or °F to the temperature
-         * String.
-         */
-        String lowString = SunshineWeatherUtils.formatTemperature(DetailActivity.this, minInCelsius);
+        public ObservableField<String> getDescription() {
+            return description;
+        }
 
-        String lowA11y = getString(R.string.a11y_low_temp, lowString);
+        public ObservableField<String> getHumidity() {
+            return humidity;
+        }
 
-        /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.primaryInfo.lowTemperature.setText(lowString);
-        mDetailBinding.primaryInfo.lowTemperature.setContentDescription(lowA11y);
+        public ObservableField<Integer> getImageId() {
+            return imageId;
+        }
 
-        /************
-         * Humidity *
-         ************/
+        public ObservableField<String> getLowTemperature() {
+            return lowTemperature;
+        }
 
-        double humidity = weatherEntry.getHumidity();
-        String humidityString = getString(R.string.format_humidity, humidity);
-        String humidityA11y = getString(R.string.a11y_humidity, humidityString);
+        public ObservableField<String> getPressure() {
+            return pressure;
+        }
 
-        /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.extraDetails.humidity.setText(humidityString);
-        mDetailBinding.extraDetails.humidity.setContentDescription(humidityA11y);
-
-        mDetailBinding.extraDetails.humidityLabel.setContentDescription(humidityA11y);
-
-        /****************************
-         * Wind speed and direction *
-         ****************************/
-        /* Read wind speed (in MPH) and direction (in compass degrees)*/
-        double windSpeed = weatherEntry.getWind();
-        double windDirection = weatherEntry.getDegrees();
-        String windString = SunshineWeatherUtils.getFormattedWind(DetailActivity.this, windSpeed, windDirection);
-        String windA11y = getString(R.string.a11y_wind, windString);
-
-        /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.extraDetails.windMeasurement.setText(windString);
-        mDetailBinding.extraDetails.windMeasurement.setContentDescription(windA11y);
-        mDetailBinding.extraDetails.windLabel.setContentDescription(windA11y);
-
-        /************
-         * Pressure *
-         ************/
-        double pressure = weatherEntry.getPressure();
-
-        /*
-         * Format the pressure text using string resources. The reason we directly access
-         * resources using getString rather than using a method from SunshineWeatherUtils as
-         * we have for other data displayed in this Activity is because there is no
-         * additional logic that needs to be considered in order to properly display the
-         * pressure.
-         */
-        String pressureString = getString(R.string.format_pressure, pressure);
-
-        String pressureA11y = getString(R.string.a11y_pressure, pressureString);
-
-        /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.extraDetails.pressure.setText(pressureString);
-        mDetailBinding.extraDetails.pressure.setContentDescription(pressureA11y);
-        mDetailBinding.extraDetails.pressureLabel.setContentDescription(pressureA11y);
+        public ObservableField<String> getWind() {
+            return wind;
+        }
     }
 }

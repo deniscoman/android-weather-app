@@ -18,6 +18,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="weatherPresenter"
+            type="com.example.android.sunshine.ui.detail.DetailActivity.EntityPresenter" />
+    </data>
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/extra_details"
         android:layout_width="match_parent"
@@ -54,7 +60,7 @@
             style="@style/ExtraWeatherMeasurement"
             app:layout_constraintBottom_toBottomOf="@+id/humidity_label"
             app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
-            tools:text="38%"/>
+            tools:text="@{weatherPresenter.humidity}"/>
 
         <!-- Pressure label -->
         <TextView
@@ -71,7 +77,7 @@
             style="@style/ExtraWeatherMeasurement"
             app:layout_constraintBottom_toBottomOf="@+id/pressure_label"
             app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
-            tools:text="995 hPa"/>
+            tools:text="@{weatherPresenter.pressure}"/>
 
         <!-- Wind label -->
         <TextView
@@ -89,7 +95,7 @@
             style="@style/ExtraWeatherMeasurement"
             app:layout_constraintBottom_toBottomOf="@+id/wind_label"
             app:layout_constraintLeft_toLeftOf="@+id/horizontal_middle"
-            tools:text="4km/h NW"/>
+            tools:text="@{weatherPresenter.wind}"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>
